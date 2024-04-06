@@ -1,43 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import 'package:run_app/view_model/cubits/counter_cubit/counter_cubit.dart';
+import 'package:run_app/view_model/cubits/names_cubit/names_cubit.dart';
 import 'package:run_app/view_model/utils/app_colors.dart';
-import '../../../view_model/cubits/counter_cubit/counter_states.dart';
-import 'second_names.dart';
+import '../../../view_model/cubits/names_cubit/names_state.dart';
 
-class NamesScreen extends StatelessWidget {
-  const NamesScreen({super.key});
+class SecondsNamesScreen extends StatelessWidget {
+  const SecondsNamesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Names', style: TextStyle(color: AppColors.white),),
+        title: const Text('Second Names', style: TextStyle(color: AppColors.white),),
+        iconTheme: IconThemeData(
+          color: AppColors.white,
+        ),
         actions: [
-          IconButton(
-            onPressed: () {
-              CounterCubit.hossam(context).resetNames();
-            },
-            icon: Icon(
-              Icons.cleaning_services_rounded,
-              color: AppColors.white,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SecondsNamesScreen(),
-                ),
-              );
-            },
-            icon: Icon(
-              Icons.telegram,
-              color: AppColors.white,
-            ),
-          ),
         ],
       ),
       body: Padding(
@@ -45,17 +24,20 @@ class NamesScreen extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: BlocBuilder<CounterCubit, CounterState>(
+              child: BlocBuilder<NamesCubit, NamesState>(
                 builder: (context, state) {
                   return Visibility(
-                    visible: CounterCubit.hossam(context).names.isNotEmpty,
+                    visible: NamesCubit.get(context).names.isNotEmpty,
                     replacement: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Lottie.network(
-                            'https://lottie.host/0cbc3e43-7722-4812-927e-ddc0d4072d34/xug1oNlcWe.json',
-                            height: 200,
+                          Hero(
+                            tag: 'kareem',
+                            child: Lottie.network(
+                              'https://lottie.host/0cbc3e43-7722-4812-927e-ddc0d4072d34/xug1oNlcWe.json',
+                              height: 200,
+                            ),
                           ),
                           SizedBox(
                             height: 12,
@@ -71,7 +53,7 @@ class NamesScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return ListTile(
                             title: Text(
-                              CounterCubit.hossam(context).names[index],
+                              NamesCubit.get(context).names[index],
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           );
@@ -79,7 +61,7 @@ class NamesScreen extends StatelessWidget {
                         separatorBuilder: (context, index) => SizedBox(
                               height: 12,
                             ),
-                        itemCount: CounterCubit.hossam(context).names.length),
+                        itemCount: NamesCubit.get(context).names.length),
                   );
                 },
               ),
@@ -92,7 +74,7 @@ class NamesScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextFormField(
-                      controller: CounterCubit.hossam(context).nameController,
+                      controller: NamesCubit.get(context).nameController,
                       decoration: InputDecoration(
                         hintText: 'Enter Name',
                         hintStyle: Theme.of(context).textTheme.bodyMedium,
@@ -109,7 +91,7 @@ class NamesScreen extends StatelessWidget {
                     turns: const AlwaysStoppedAnimation(330 / 360),
                     child: IconButton(
                       onPressed: () {
-                        CounterCubit.hossam(context).addName();
+                        NamesCubit.get(context).addName();
                       },
                       icon: Icon(
                         Icons.send_rounded,
