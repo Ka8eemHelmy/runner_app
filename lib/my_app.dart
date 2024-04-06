@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:run_app/view_model/cubits/counter_cubit/counter_cubit.dart';
 import 'package:run_app/view_model/utils/app_colors.dart';
-import 'view/screens/counter/first_screen.dart';
 import 'view/screens/counter/names.dart';
-import 'view/screens/store/store_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
