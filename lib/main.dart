@@ -4,5 +4,4 @@ import 'my_app.dart';
 void main() {
   // Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
-  /// Kareem Edit Here
 }
